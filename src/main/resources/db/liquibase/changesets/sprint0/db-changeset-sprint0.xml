@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="member_base_schema" author="lakshit" logicalFilePath="changesets/sprint0/db-changeset-sprint0.xml">
+        <sqlFile path="sql/alter_member.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
