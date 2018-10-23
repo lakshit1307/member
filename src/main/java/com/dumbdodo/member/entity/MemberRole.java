@@ -1,15 +1,13 @@
 package com.dumbdodo.member.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "M_MEMBER")
+@Table(name = "M_MEMBER_ROLE")
 @AttributeOverrides({
         @AttributeOverride(name = "createdDate", column =
         @Column(name = "CREATED_DATE")),
@@ -27,25 +25,19 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Member extends BaseEntity {
+public class MemberRole extends BaseEntity {
 
     @Id
-    @Column(name = "MEMBER_ID")
+    @Column(name = "MEMBER_ROLE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MEMBER_NAME")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
+    private Role role;
 
-    @Column(name = "MEMBER_EMAIL")
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
+    private Member member;
 
-    @Column(name = "MEMBER_DESCRIPTION")
-    private String description;
-
-    @Column(name = "MEMBER_PASSWORD")
-    private String password;
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private Set<MemberRole> memberRoles;
 }

@@ -3,7 +3,7 @@ package com.dumbdodo.member.controller;
 import com.dumbdodo.member.common.Constants;
 import com.dumbdodo.member.dto.BaseResponse;
 import com.dumbdodo.member.dto.CreateMemberDto;
-import com.dumbdodo.member.entity.Member;
+import com.dumbdodo.member.dto.MemberResponseDto;
 import com.dumbdodo.member.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,13 +35,13 @@ public class MemberController {
 
     @GetMapping("/")
     public @ResponseBody
-    ResponseEntity<List<Member>> getMembers() {
+    ResponseEntity<List<MemberResponseDto>> getMembers() {
         return new ResponseEntity<>(memberService.getAllMembers(), HttpStatus.OK);
     }
 
     @GetMapping("/{memberId}")
     public @ResponseBody
-    ResponseEntity<Member> getMemberById(@PathVariable(value = "memberId") Long memberId) {
+    ResponseEntity<MemberResponseDto> getMemberById(@PathVariable(value = "memberId") Long memberId) {
         return new ResponseEntity<>(memberService.getMemberById(memberId), HttpStatus.OK);
     }
 
