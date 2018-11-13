@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MemberResponseDto {
+public class MemberResponseDto implements Serializable {
 
     private Long id;
 
@@ -24,4 +25,6 @@ public class MemberResponseDto {
     private String password;
 
     private Set<RoleResponseDto> roles;
+
+
 }

@@ -34,6 +34,8 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-redis')
 	implementation('org.springframework.boot:spring-boot-starter-security')
 	implementation('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-data-redis")
+//	compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.6.0'
 	implementation('org.liquibase:liquibase-core')
 //	implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
 	compileOnly('org.projectlombok:lombok')
