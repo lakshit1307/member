@@ -2,10 +2,14 @@ package com.dumbdodo.member.service;
 
 import com.dumbdodo.member.common.Constants;
 import com.dumbdodo.member.dao.MemberDao;
+import com.dumbdodo.member.dao.elastic.AuditDao;
 import com.dumbdodo.member.dto.CreateMemberDto;
 import com.dumbdodo.member.dto.MemberResponseDto;
 import com.dumbdodo.member.dto.RoleResponseDto;
 import com.dumbdodo.member.entity.Member;
+import com.dumbdodo.member.entity.elastic.Audit;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +32,9 @@ public class MemberService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private AuditDao auditDao;
+
     public List<MemberResponseDto> getAllMembers() {
         List<MemberResponseDto> memberResponseDtos = new ArrayList<>();
         memberDao.getAllMembers().forEach(member -> {
@@ -46,8 +53,20 @@ public class MemberService {
         return memberResponseDto;
     }
 
-    public Member saveMember(CreateMemberDto memberDto) {
-        return memberDao.saveMember(mapDtoToMemberEntity(memberDto));
+    public Member saveMember(CreateMemberDto memberDto) throws JsonProcessingException {
+        Audit audit = new Audit();
+        audit.setEntityType("MEMBER");
+        Member member = memberDao.saveMember(mapDtoToMemberEntity(memberDto));
+        audit.setEntityId(member.getId());
+        audit.setChangedBy(member.getUpdatedBy());
+        audit.setAfterChange(new ObjectMapper().writeValueAsString(memberDto));
+        audit.setCreatedBy(Constants.ADMIN);
+        audit.setUpdatedBy(Constants.ADMIN);
+        audit.setCreatedDate(new Date());
+        audit.setUpdatedDate(new Date());
+        audit.setTenantId(member.getTenantId());
+        auditDao.save(audit);
+        return member;
     }
 
     private Member mapDtoToMemberEntity(CreateMemberDto memberDto) {

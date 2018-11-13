@@ -5,6 +5,7 @@ import com.dumbdodo.member.dto.BaseResponse;
 import com.dumbdodo.member.dto.CreateMemberDto;
 import com.dumbdodo.member.dto.MemberResponseDto;
 import com.dumbdodo.member.service.MemberService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class MemberController {
 
     @PutMapping("/")
     public @ResponseBody
-    ResponseEntity<BaseResponse> addMember(@RequestBody CreateMemberDto memberDto) {
+    ResponseEntity<BaseResponse> addMember(@RequestBody CreateMemberDto memberDto) throws JsonProcessingException {
         memberService.saveMember(memberDto);
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatus(Constants.SUCCESS);

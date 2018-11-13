@@ -11,23 +11,23 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 @Configuration
 public class RedisConfig {
 
-//    @Bean
-//    JedisConnectionFactory jedisConnectionFactory() {
-//        JedisConnectionFactory jedisConFactory
-//                = new JedisConnectionFactory();
-//        return jedisConFactory;
-//    }
-
     @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+    JedisConnectionFactory jedisConnectionFactory() {
+        JedisConnectionFactory jedisConFactory
+                = new JedisConnectionFactory();
+        return jedisConFactory;
     }
+
+//    @Bean
+//    public LettuceConnectionFactory redisConnectionFactory() {
+//
+//        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+//    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
         final RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-        template.setConnectionFactory(redisConnectionFactory());
+        template.setConnectionFactory(jedisConnectionFactory());
         template.setValueSerializer(new GenericToStringSerializer<>(Object.class));
         return template;
     }
