@@ -32,10 +32,4 @@ public class RedisConfig {
         return template;
     }
 
-
-//    @Bean
-//    RedisPublisher redisPublisher() {
-//        return new RedisPublisher(redisTemplate(), topic());
-//    }
-
 }

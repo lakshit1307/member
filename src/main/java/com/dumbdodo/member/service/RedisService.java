@@ -51,6 +51,7 @@ public class RedisService {
      *
      * @param key The key of the hash cache
      */
+    //TODO DONT KNOW IF IT WORKS OR NOT
     public void clearRedisCache(String key) {
         redisTemplate.delete(key);
     }
