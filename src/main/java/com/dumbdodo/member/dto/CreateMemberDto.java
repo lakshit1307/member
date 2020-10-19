@@ -32,7 +32,4 @@ public class CreateMemberDto implements Serializable {
     @NotBlank(message = ErrorCode.MEMBER_PASSWORD_REQUIRED)
     private String password;
 
-    @ApiModelProperty(value = "Description of the member", required = true)
-    private String description;
-
 }

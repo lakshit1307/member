@@ -70,7 +70,7 @@ public class MemberService {
 
     private Member mapDtoToMemberEntity(CreateMemberDto memberDto) {
         Member member = new Member();
-        member.setDescription(memberDto.getDescription());
+        member.setDescription("System");
         member.setEmail(memberDto.getEmail());
         member.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
         member.setName(memberDto.getName());

@@ -24,6 +24,7 @@ public class ControllerRequetExceptionHandler {
         LOGGER.error(ex.getMessage(), ex);
         String message = "Something went wrong";
         BaseResponse response = new BaseResponse("error", message);
+        LOGGER.error(ex.getMessage());
         return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

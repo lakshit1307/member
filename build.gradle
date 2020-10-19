@@ -38,7 +38,8 @@ dependencies {
 //	compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.6.0'
 	implementation('org.liquibase:liquibase-core')
 //	implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
-	compileOnly('org.projectlombok:lombok')
+	implementation('org.projectlombok:lombok:1.18.8')
+	annotationProcessor 'org.projectlombok:lombok:1.18.8'
 	runtimeOnly('org.postgresql:postgresql')
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'

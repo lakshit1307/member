@@ -10,6 +10,4 @@ WORKDIR /var/app
 
 ENTRYPOINT ["java","-jar","-Dspring.profiles.active=container","member.jar"]
 
-
-#EXPOSE 8080
-#EXPOSE 5432
+EXPOSE 5432
